@@ -39,9 +39,23 @@ function switchTheme(e) {
   if (e.target.checked) {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark"); //add this
+    updateLogo("dark");
   } else {
     document.documentElement.setAttribute("data-theme", "light");
     localStorage.setItem("theme", "light"); //add this
+    updateLogo("light");
+  }
+}
+
+// Update logo based on theme
+function updateLogo(theme) {
+  const logoImg = document.querySelector("#logo img");
+  if (logoImg) {
+    if (theme === "dark") {
+      logoImg.src = "./assets/logo-dark.png";
+    } else {
+      logoImg.src = "./assets/logo.png";
+    }
   }
 }
 
@@ -57,6 +71,12 @@ if (currentTheme) {
   if (currentTheme === "dark") {
     toggleSwitch.checked = true;
   }
+
+  // Update logo based on saved theme
+  updateLogo(currentTheme);
+} else {
+  // Set default logo for light theme
+  updateLogo("light");
 }
 
 //Adding date
